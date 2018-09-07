@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry
+		location="D:\software\java\.m2\repository\mysql\mysql-connector-java\5.1.33\mysql-connector-java-5.1.33.jar" />
+	<context id="context1">
+		<commentGenerator>
+			<!-- 不生成注释和时间戳 -->
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/transfer_bank" userId="root"
+			password="syl5424055" />
+		<javaModelGenerator targetPackage="com.etransfar.transBank.model"
+			targetProject="transBank\src\main\java\" />
+		<sqlMapGenerator targetPackage="com.etransfar.transBank.dao" targetProject="transBank\src\main\java\" />
+		<javaClientGenerator targetPackage="com.etransfar.transBank.dao"
+			targetProject="transBank\src\main\java\" type="XMLMAPPER" />
+		
+
+		<table schema="transfer_bank" tableName="tb_account"></table>
+		<table schema="transfer_bank" tableName="tb_account_detail"></table>
+		
+	</context>
+</generatorConfiguration>

@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.etransfar.transBank.dao.TbAccountDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.etransfar.transBank.model.TbAccountDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="account_id" property="accountId" jdbcType="INTEGER" />
+    <result column="serial_no" property="serialNo" jdbcType="VARCHAR" />
+    <result column="trade_channel" property="tradeChannel" jdbcType="TINYINT" />
+    <result column="trade_type" property="tradeType" jdbcType="TINYINT" />
+    <result column="account_no" property="accountNo" jdbcType="VARCHAR" />
+    <result column="account_name" property="accountName" jdbcType="VARCHAR" />
+    <result column="bank_no" property="bankNo" jdbcType="VARCHAR" />
+    <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+    <result column="opp_account_no" property="oppAccountNo" jdbcType="VARCHAR" />
+    <result column="opp_account_name" property="oppAccountName" jdbcType="VARCHAR" />
+    <result column="opp_bank_no" property="oppBankNo" jdbcType="VARCHAR" />
+    <result column="opp_bank_name" property="oppBankName" jdbcType="VARCHAR" />
+    <result column="cur_code" property="curCode" jdbcType="TINYINT" />
+    <result column="trade_amount" property="tradeAmount" jdbcType="DECIMAL" />
+    <result column="trade_date" property="tradeDate" jdbcType="VARCHAR" />
+    <result column="trade_time" property="tradeTime" jdbcType="VARCHAR" />
+    <result column="print_times" property="printTimes" jdbcType="INTEGER" />
+    <result column="sum_code" property="sumCode" jdbcType="VARCHAR" />
+    <result column="protect_code" property="protectCode" jdbcType="VARCHAR" />
+    <result column="purpose" property="purpose" jdbcType="VARCHAR" />
+    <result column="post_script" property="postScript" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="reserve" property="reserve" jdbcType="VARCHAR" />
+    <result column="balance" property="balance" jdbcType="DECIMAL" />
+    <result column="receipt" property="receipt" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, account_id, serial_no, trade_channel, trade_type, account_no, account_name, bank_no, 
+    bank_name, opp_account_no, opp_account_name, opp_bank_no, opp_bank_name, cur_code, 
+    trade_amount, trade_date, trade_time, print_times, sum_code, protect_code, purpose, 
+    post_script, memo, reserve, balance, receipt, is_delete, gmt_create, gmt_modified
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.etransfar.transBank.model.TbAccountDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_account_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_account_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_account_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.etransfar.transBank.model.TbAccountDetailExample" >
+    delete from tb_account_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.etransfar.transBank.model.TbAccountDetail" >
+    insert into tb_account_detail (id, account_id, serial_no, 
+      trade_channel, trade_type, account_no, 
+      account_name, bank_no, bank_name, 
+      opp_account_no, opp_account_name, opp_bank_no, 
+      opp_bank_name, cur_code, trade_amount, 
+      trade_date, trade_time, print_times, 
+      sum_code, protect_code, purpose, 
+      post_script, memo, reserve, 
+      balance, receipt, is_delete, 
+      gmt_create, gmt_modified)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{serialNo,jdbcType=VARCHAR}, 
+      #{tradeChannel,jdbcType=TINYINT}, #{tradeType,jdbcType=TINYINT}, #{accountNo,jdbcType=VARCHAR}, 
+      #{accountName,jdbcType=VARCHAR}, #{bankNo,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, 
+      #{oppAccountNo,jdbcType=VARCHAR}, #{oppAccountName,jdbcType=VARCHAR}, #{oppBankNo,jdbcType=VARCHAR}, 
+      #{oppBankName,jdbcType=VARCHAR}, #{curCode,jdbcType=TINYINT}, #{tradeAmount,jdbcType=DECIMAL}, 
+      #{tradeDate,jdbcType=VARCHAR}, #{tradeTime,jdbcType=VARCHAR}, #{printTimes,jdbcType=INTEGER}, 
+      #{sumCode,jdbcType=VARCHAR}, #{protectCode,jdbcType=VARCHAR}, #{purpose,jdbcType=VARCHAR}, 
+      #{postScript,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{reserve,jdbcType=VARCHAR}, 
+      #{balance,jdbcType=DECIMAL}, #{receipt,jdbcType=VARCHAR}, #{isDelete,jdbcType=TINYINT}, 
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.etransfar.transBank.model.TbAccountDetail" >
+    insert into tb_account_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="serialNo != null" >
+        serial_no,
+      </if>
+      <if test="tradeChannel != null" >
+        trade_channel,
+      </if>
+      <if test="tradeType != null" >
+        trade_type,
+      </if>
+      <if test="accountNo != null" >
+        account_no,
+      </if>
+      <if test="accountName != null" >
+        account_name,
+      </if>
+      <if test="bankNo != null" >
+        bank_no,
+      </if>
+      <if test="bankName != null" >
+        bank_name,
+      </if>
+      <if test="oppAccountNo != null" >
+        opp_account_no,
+      </if>
+      <if test="oppAccountName != null" >
+        opp_account_name,
+      </if>
+      <if test="oppBankNo != null" >
+        opp_bank_no,
+      </if>
+      <if test="oppBankName != null" >
+        opp_bank_name,
+      </if>
+      <if test="curCode != null" >
+        cur_code,
+      </if>
+      <if test="tradeAmount != null" >
+        trade_amount,
+      </if>
+      <if test="tradeDate != null" >
+        trade_date,
+      </if>
+      <if test="tradeTime != null" >
+        trade_time,
+      </if>
+      <if test="printTimes != null" >
+        print_times,
+      </if>
+      <if test="sumCode != null" >
+        sum_code,
+      </if>
+      <if test="protectCode != null" >
+        protect_code,
+      </if>
+      <if test="purpose != null" >
+        purpose,
+      </if>
+      <if test="postScript != null" >
+        post_script,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="reserve != null" >
+        reserve,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="receipt != null" >
+        receipt,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="serialNo != null" >
+        #{serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeChannel != null" >
+        #{tradeChannel,jdbcType=TINYINT},
+      </if>
+      <if test="tradeType != null" >
+        #{tradeType,jdbcType=TINYINT},
+      </if>
+      <if test="accountNo != null" >
+        #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null" >
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNo != null" >
+        #{bankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="oppAccountNo != null" >
+        #{oppAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="oppAccountName != null" >
+        #{oppAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="oppBankNo != null" >
+        #{oppBankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="oppBankName != null" >
+        #{oppBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="curCode != null" >
+        #{curCode,jdbcType=TINYINT},
+      </if>
+      <if test="tradeAmount != null" >
+        #{tradeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeDate != null" >
+        #{tradeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeTime != null" >
+        #{tradeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="printTimes != null" >
+        #{printTimes,jdbcType=INTEGER},
+      </if>
+      <if test="sumCode != null" >
+        #{sumCode,jdbcType=VARCHAR},
+      </if>
+      <if test="protectCode != null" >
+        #{protectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="purpose != null" >
+        #{purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="postScript != null" >
+        #{postScript,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve != null" >
+        #{reserve,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="receipt != null" >
+        #{receipt,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.etransfar.transBank.model.TbAccountDetailExample" resultType="java.lang.Integer" >
+    select count(*) from tb_account_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_account_detail
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.accountId != null" >
+        account_id = #{record.accountId,jdbcType=INTEGER},
+      </if>
+      <if test="record.serialNo != null" >
+        serial_no = #{record.serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeChannel != null" >
+        trade_channel = #{record.tradeChannel,jdbcType=TINYINT},
+      </if>
+      <if test="record.tradeType != null" >
+        trade_type = #{record.tradeType,jdbcType=TINYINT},
+      </if>
+      <if test="record.accountNo != null" >
+        account_no = #{record.accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountName != null" >
+        account_name = #{record.accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankNo != null" >
+        bank_no = #{record.bankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankName != null" >
+        bank_name = #{record.bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oppAccountNo != null" >
+        opp_account_no = #{record.oppAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oppAccountName != null" >
+        opp_account_name = #{record.oppAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oppBankNo != null" >
+        opp_bank_no = #{record.oppBankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oppBankName != null" >
+        opp_bank_name = #{record.oppBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curCode != null" >
+        cur_code = #{record.curCode,jdbcType=TINYINT},
+      </if>
+      <if test="record.tradeAmount != null" >
+        trade_amount = #{record.tradeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tradeDate != null" >
+        trade_date = #{record.tradeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeTime != null" >
+        trade_time = #{record.tradeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.printTimes != null" >
+        print_times = #{record.printTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.sumCode != null" >
+        sum_code = #{record.sumCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.protectCode != null" >
+        protect_code = #{record.protectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purpose != null" >
+        purpose = #{record.purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postScript != null" >
+        post_script = #{record.postScript,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memo != null" >
+        memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve != null" >
+        reserve = #{record.reserve,jdbcType=VARCHAR},
+      </if>
+      <if test="record.balance != null" >
+        balance = #{record.balance,jdbcType=DECIMAL},
+      </if>
+      <if test="record.receipt != null" >
+        receipt = #{record.receipt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="record.gmtCreate != null" >
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModified != null" >
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_account_detail
+    set id = #{record.id,jdbcType=INTEGER},
+      account_id = #{record.accountId,jdbcType=INTEGER},
+      serial_no = #{record.serialNo,jdbcType=VARCHAR},
+      trade_channel = #{record.tradeChannel,jdbcType=TINYINT},
+      trade_type = #{record.tradeType,jdbcType=TINYINT},
+      account_no = #{record.accountNo,jdbcType=VARCHAR},
+      account_name = #{record.accountName,jdbcType=VARCHAR},
+      bank_no = #{record.bankNo,jdbcType=VARCHAR},
+      bank_name = #{record.bankName,jdbcType=VARCHAR},
+      opp_account_no = #{record.oppAccountNo,jdbcType=VARCHAR},
+      opp_account_name = #{record.oppAccountName,jdbcType=VARCHAR},
+      opp_bank_no = #{record.oppBankNo,jdbcType=VARCHAR},
+      opp_bank_name = #{record.oppBankName,jdbcType=VARCHAR},
+      cur_code = #{record.curCode,jdbcType=TINYINT},
+      trade_amount = #{record.tradeAmount,jdbcType=DECIMAL},
+      trade_date = #{record.tradeDate,jdbcType=VARCHAR},
+      trade_time = #{record.tradeTime,jdbcType=VARCHAR},
+      print_times = #{record.printTimes,jdbcType=INTEGER},
+      sum_code = #{record.sumCode,jdbcType=VARCHAR},
+      protect_code = #{record.protectCode,jdbcType=VARCHAR},
+      purpose = #{record.purpose,jdbcType=VARCHAR},
+      post_script = #{record.postScript,jdbcType=VARCHAR},
+      memo = #{record.memo,jdbcType=VARCHAR},
+      reserve = #{record.reserve,jdbcType=VARCHAR},
+      balance = #{record.balance,jdbcType=DECIMAL},
+      receipt = #{record.receipt,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=TINYINT},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.etransfar.transBank.model.TbAccountDetail" >
+    update tb_account_detail
+    <set >
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="serialNo != null" >
+        serial_no = #{serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeChannel != null" >
+        trade_channel = #{tradeChannel,jdbcType=TINYINT},
+      </if>
+      <if test="tradeType != null" >
+        trade_type = #{tradeType,jdbcType=TINYINT},
+      </if>
+      <if test="accountNo != null" >
+        account_no = #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null" >
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNo != null" >
+        bank_no = #{bankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="oppAccountNo != null" >
+        opp_account_no = #{oppAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="oppAccountName != null" >
+        opp_account_name = #{oppAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="oppBankNo != null" >
+        opp_bank_no = #{oppBankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="oppBankName != null" >
+        opp_bank_name = #{oppBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="curCode != null" >
+        cur_code = #{curCode,jdbcType=TINYINT},
+      </if>
+      <if test="tradeAmount != null" >
+        trade_amount = #{tradeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeDate != null" >
+        trade_date = #{tradeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeTime != null" >
+        trade_time = #{tradeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="printTimes != null" >
+        print_times = #{printTimes,jdbcType=INTEGER},
+      </if>
+      <if test="sumCode != null" >
+        sum_code = #{sumCode,jdbcType=VARCHAR},
+      </if>
+      <if test="protectCode != null" >
+        protect_code = #{protectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="purpose != null" >
+        purpose = #{purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="postScript != null" >
+        post_script = #{postScript,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve != null" >
+        reserve = #{reserve,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="receipt != null" >
+        receipt = #{receipt,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.etransfar.transBank.model.TbAccountDetail" >
+    update tb_account_detail
+    set account_id = #{accountId,jdbcType=INTEGER},
+      serial_no = #{serialNo,jdbcType=VARCHAR},
+      trade_channel = #{tradeChannel,jdbcType=TINYINT},
+      trade_type = #{tradeType,jdbcType=TINYINT},
+      account_no = #{accountNo,jdbcType=VARCHAR},
+      account_name = #{accountName,jdbcType=VARCHAR},
+      bank_no = #{bankNo,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      opp_account_no = #{oppAccountNo,jdbcType=VARCHAR},
+      opp_account_name = #{oppAccountName,jdbcType=VARCHAR},
+      opp_bank_no = #{oppBankNo,jdbcType=VARCHAR},
+      opp_bank_name = #{oppBankName,jdbcType=VARCHAR},
+      cur_code = #{curCode,jdbcType=TINYINT},
+      trade_amount = #{tradeAmount,jdbcType=DECIMAL},
+      trade_date = #{tradeDate,jdbcType=VARCHAR},
+      trade_time = #{tradeTime,jdbcType=VARCHAR},
+      print_times = #{printTimes,jdbcType=INTEGER},
+      sum_code = #{sumCode,jdbcType=VARCHAR},
+      protect_code = #{protectCode,jdbcType=VARCHAR},
+      purpose = #{purpose,jdbcType=VARCHAR},
+      post_script = #{postScript,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      reserve = #{reserve,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=DECIMAL},
+      receipt = #{receipt,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=TINYINT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
